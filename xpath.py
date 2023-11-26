@@ -1,3 +1,5 @@
+from info import username
+
 xpath = {
     'login' : {
         'username' : "//input[@name='username']",
@@ -8,7 +10,9 @@ xpath = {
         'confirm_button' : "//button[text()='Confirm']",
         'save_login_button' : "//div[text()='Not Now']",
         'notif_button' : "//button[text()='Not Now']"
-
+    },
+    'home_page' : {
+        'direct_button' : f"//a[text()='{username}']"
     }
 }
 
