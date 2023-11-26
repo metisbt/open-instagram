@@ -1,9 +1,15 @@
-from selenium import webdriver
 import time
-from selenium.webdriver.firefox.service import Service as FirefoxService
+from info import username, password
+from browser import Browser
 
-driver = webdriver.Firefox()
+def main():
+    main_url = 'https://www.instagram.com/'
+    mybrowser = Browser
+    mybrowser.change_url(main_url)
+    mybrowser
+    
 
-driver.get('https://google.com')
-time.sleep(10)
-driver.close()
+
+
+if __name__ == '__main__':
+    main()
