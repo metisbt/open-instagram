@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 from xpath import get_xpath
 from function import check_logged_in
 import os.path
+import json
+
 
 def login(browser):
     while True:
@@ -28,7 +30,10 @@ def login(browser):
         else:
             browser.save_cookies(username)
             
-
+def get_data(browser_for_data, url):
+    browser_for_data.change_url(url + username)
+    return json.dump(browser_for_data.driver.execute_script('return window._shareData'))
+    
 def main():
     main_url = 'https://www.instagram.com/'
     mybrowser = Browser()  # ایجاد یک نمونه از کلاس Browser
@@ -39,11 +44,14 @@ def main():
         not_now(mybrowser.driver, get_xpath('login', 'notif_button'))
         time.sleep(3)
         if check_logged_in(mybrowser):
-            mybrowser.change_url('https://www.instagram.com/direct/inbox/')
-        else:
-            login(mybrowser)
+            print(get_data(mybrowser, main_url))
+        # else:
+        #     login(mybrowser)
+        #     print(get_data(mybrowser, main_url))
     else:
         login(mybrowser)
+        print(get_data(mybrowser, main_url))
+
 
 
 
