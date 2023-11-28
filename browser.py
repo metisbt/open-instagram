@@ -37,7 +37,6 @@ class Browser:
 
         for cookie in cookies:
             self.driver.add_cookie(cookie)
-        self.driver.refresh()
 
 
 def not_now(browser, element):
