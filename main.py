@@ -31,26 +31,36 @@ def login(browser):
             browser.save_cookies(username)
             
 def get_data(browser_for_data, url):
-    browser_for_data.change_url(url + username)
-    return json.dump(browser_for_data.driver.execute_script('return window._shareData'))
+    try:
+        browser_for_data.change_url(url + username)
+        return json.dump(browser_for_data.driver.execute_script('return window._shareData'))
+    except Exception as er:
+        print(f"Error: {er}")
     
 def main():
     main_url = 'https://www.instagram.com/'
     mybrowser = Browser()  # ایجاد یک نمونه از کلاس Browser
     mybrowser.change_url(main_url)  # فراخوانی متد change_url
 
-    if os.path.isfile(f'cookies/{username}.pkl'):
-        mybrowser.load_cookies(username)
-        not_now(mybrowser.driver, get_xpath('login', 'notif_button'))
-        time.sleep(3)
-        if check_logged_in(mybrowser):
-            print(get_data(mybrowser, main_url))
-        # else:
-        #     login(mybrowser)
-        #     print(get_data(mybrowser, main_url))
-    else:
+
+    try:
+        if os.path.isfile(f'cookies/{username}.pkl'):
+            mybrowser.load_cookies(username)
+            not_now(mybrowser.driver, get_xpath('login', 'notif_button'))
+            time.sleep(3)
+    except Exception as e:
+        print(f"Error: {e}")
+    
+    print("ridi2")
+    if check_logged_in(mybrowser) is False:
         login(mybrowser)
+    else:
+        print("ridi")
         print(get_data(mybrowser, main_url))
+    
+    
+
+
 
 
 
