@@ -50,16 +50,9 @@ def main():
         time.sleep(3)
         if check_logged_in(mybrowser):
             print(get_data(mybrowser, main_url))
-        # else:
-        #     login(mybrowser)
-        #     print(get_data(mybrowser, main_url))
     else:
         login(mybrowser)
         print(get_data(mybrowser, main_url))
-
-
-
-
 
 
 
